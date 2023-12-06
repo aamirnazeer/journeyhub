@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/prisma/_base';
-import { signupValidation } from '@/app/validationSchema';
+import { signupValidation } from '@/app/helpers/validationSchema';
 
 export async function POST(request: NextRequest) {
   const body = await request.json();

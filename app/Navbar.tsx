@@ -4,15 +4,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 import { SiCivicrm } from 'react-icons/si';
+import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 const links = [
   { label: 'Dashboard', href: '/' },
-  { label: 'Login', href: '/login' },
+  { label: 'Signin', href: '/signin' },
+  { label: 'Client', href: '/client' },
 ];
 
 const Navbar = () => {
   const currentPath = usePathname();
-  console.log(currentPath);
+  const { status } = useSession();
   return (
     <nav className="flex space-x-6 border-b mb-5 px-6 h-14 items-center">
       <Link href="/">
@@ -33,6 +36,9 @@ const Navbar = () => {
             </Link>
           </li>
         ))}
+        {status === 'authenticated' && (
+          <li onClick={() => signOut()}>SignOut</li>
+        )}
       </ul>
     </nav>
   );
