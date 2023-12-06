@@ -1,9 +1,7 @@
 import { z } from 'zod';
 
-export const createTestSchema = z.object({
-  title: z
-    .string()
-    .min(4, 'title should be more thatn 4 char long')
-    .max(20, 'title cannot be more than 20 char long'),
-  description: z.string().min(10).max(255),
+export const signupValidation = z.object({
+  name: z.string().min(2, 'Name too short').max(20, 'Name too long'),
+  email: z.string().email(),
+  password: z.string().min(5, 'Password should be longer than 5 charachters'),
 });
