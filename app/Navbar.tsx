@@ -9,7 +9,6 @@ import { useSession } from 'next-auth/react';
 
 const links = [
   { label: 'Dashboard', href: '/' },
-  { label: 'Signin', href: '/signin' },
   { label: 'Client', href: '/client' },
 ];
 
@@ -36,8 +35,21 @@ const Navbar = () => {
             </Link>
           </li>
         ))}
-        {status === 'authenticated' && (
-          <li onClick={() => signOut()}>SignOut</li>
+      </ul>
+      <ul className="flex space-x-6 !ml-auto">
+        {status === 'authenticated' ? (
+          <li>
+            <button onClick={() => signOut()}>SignOut</button>
+          </li>
+        ) : (
+          <>
+            <li>
+              <Link href="/signin">SignIn</Link>
+            </li>
+            <li>
+              <Link href="/SignUp">SignUp</Link>
+            </li>
+          </>
         )}
       </ul>
     </nav>

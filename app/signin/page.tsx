@@ -1,22 +1,45 @@
-import { cookies } from 'next/headers';
+'use client';
 
-export default async function SignIn() {
-  const cookieStore = cookies();
-  const token = cookieStore.get('next-auth.csrf-token');
-  const csrfToken = token?.value.split('|')[0];
+import { signIn } from 'next-auth/react';
+import { useRef } from 'react';
+
+const SignIn = () => {
+  const email = useRef('');
+  const password = useRef('');
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    await signIn('credentials', {
+      email: email.current,
+      password: password.current,
+      redirect: true,
+      callbackUrl: '/',
+    });
+  };
 
   return (
-    <form method="post" action="/api/auth/callback/credentials">
-      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+    <form>
       <label>
-        Username
-        <input name="username" type="text" />
+        Email
+        <input
+          name="email"
+          type="email"
+          onChange={(e) => (email.current = e.target.value)}
+        />
       </label>
       <label>
         Password
-        <input name="password" type="password" />
+        <input
+          name="password"
+          type="password"
+          onChange={(e) => (password.current = e.target.value)}
+        />
       </label>
-      <button type="submit">Signin</button>
+      <button type="submit" onClick={(e) => handleSubmit(e)}>
+        Signin
+      </button>
     </form>
   );
-}
+};
+
+export default SignIn;
