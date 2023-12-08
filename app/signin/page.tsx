@@ -6,6 +6,8 @@ import { signinValidationSchema } from '../helpers/validationSchema';
 import { z } from 'zod';
 import classNames from 'classnames';
 import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 type SignInForm = z.infer<typeof signinValidationSchema>;
 
@@ -18,12 +20,15 @@ const SignIn = () => {
       callbackUrl: '/',
     });
   };
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInForm>({ resolver: zodResolver(signinValidationSchema) });
+  const { status } = useSession();
+  if (status === 'authenticated') redirect('/');
+  if (status === 'loading') return <p>Loading...</p>;
+
   return (
     <form
       className="flex flex-col max-w-md m-auto"

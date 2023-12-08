@@ -16,4 +16,6 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ['/client', '/server', '/api/:path*'] };
+export const config = {
+  matcher: ['/client', '/server', '/api/:path*'],
+};

@@ -5,6 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signupValidation } from '../helpers/validationSchema';
 import { z } from 'zod';
 import classNames from 'classnames';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 type SignUpForm = z.infer<typeof signupValidation>;
@@ -15,10 +17,13 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpForm>({ resolver: zodResolver(signupValidation) });
+  const { status } = useSession();
+  if (status === 'authenticated') redirect('/');
+  if (status === 'loading') return <p>Loading...</p>;
 
   const onSubmit = async (data: SignUpForm) => {
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch('/api/auth/signup', {
         method: 'POST',
         mode: 'cors',
         credentials: 'same-origin',
