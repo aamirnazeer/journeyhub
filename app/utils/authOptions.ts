@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, session, trigger }) {
       if (user) {
         token.id = user.id;
-        token.organisation = user.organisation;
+        token.organisationId = user.organisationId;
       }
       if (trigger === 'update' && session.name) {
         token.name = session.name;
@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token, user }) {
       session.user.id = token.id;
-      session.user.organisation = token.organisation;
+      session.user.organisationId = token.organisationId;
       delete session.user?.image;
       return session;
     },

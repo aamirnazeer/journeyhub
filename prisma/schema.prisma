@@ -11,15 +11,16 @@ datasource db {
 }
 
 model Users {
-  id           String  @id @default(uuid())
-  name         String  @db.VarChar(20)
-  email        String  @unique @db.VarChar(40)
-  password     String  @db.VarChar(100)
-  organisation String? @default(uuid())
+  id             String        @id @default(uuid())
+  name           String        @db.VarChar(20)
+  email          String        @unique @db.VarChar(40)
+  password       String        @db.VarChar(100)
+  organisationId String?       @db.VarChar(50)
+  organisation   Organisation? @relation(fields: [organisationId], references: [id])
 }
 
-model Test {
-  id         String @id @default(uuid())
-  title      String @db.VarChar(20)
-  descripton String @db.VarChar(255)
+model Organisation {
+  id    String  @id @default(uuid())
+  name  String  @db.VarChar(30)
+  Users Users[]
 }
