@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/prisma/_base';
 import { signupValidation } from '@/app/helpers/validationSchema';
+import bcrypt from 'bcrypt';
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -10,8 +11,9 @@ export async function POST(request: NextRequest) {
     if (!validation.success)
       return NextResponse.json(validation.error.format(), { status: 400 });
 
+    const hash = bcrypt.hashSync(body.password, 10);
     await prisma.users.create({
-      data: { name: body.name, email: body.email, password: body.password },
+      data: { name: body.name, email: body.email, password: hash },
     });
 
     return NextResponse.json(

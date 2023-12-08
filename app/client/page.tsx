@@ -3,12 +3,19 @@
 import { useSession } from 'next-auth/react';
 
 const Client = () => {
-  const { data } = useSession();
+  const getHandler = async () => [
+    await fetch('/api/test', {
+      method: 'GET',
+      credentials: 'include',
+    }),
+  ];
+  const data = useSession();
   return (
     <>
       <div>
-        <h1>client</h1>
+        <h1>Client</h1>
         <p>{JSON.stringify(data)}</p>
+        <button onClick={getHandler}>get</button>
       </div>
     </>
   );

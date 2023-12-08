@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Users {
-  id       String @id @default(uuid())
-  name     String @db.VarChar(20)
-  email    String @unique @db.VarChar(40)
-  password String @db.VarChar(100)
+  id           String  @id @default(uuid())
+  name         String  @db.VarChar(20)
+  email        String  @unique @db.VarChar(40)
+  password     String  @db.VarChar(100)
+  organisation String? @default(uuid())
 }
 
 model Test {

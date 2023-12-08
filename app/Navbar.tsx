@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/react';
 const links = [
   { label: 'Dashboard', href: '/' },
   { label: 'Client', href: '/client' },
+  { label: 'Server', href: '/server' },
 ];
 
 const Navbar = () => {
@@ -20,26 +21,35 @@ const Navbar = () => {
       <Link href="/">
         <SiCivicrm />
       </Link>
-      <ul className="flex space-x-6">
-        {links.map((link) => (
-          <li key={link.label}>
-            <Link
-              href={link.href}
-              className={classNames({
-                'text-zinc-900': link.href === currentPath,
-                'text-zinc-500': link.href !== currentPath,
-                'hover:text-zinc-800 transition-colors': true,
-              })}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {status === 'authenticated' && (
+        <ul className="flex space-x-6">
+          {links.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className={classNames({
+                  'text-zinc-900': link.href === currentPath,
+                  'text-zinc-500': link.href !== currentPath,
+                  'hover:text-zinc-800 transition-colors': true,
+                })}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+
       <ul className="flex space-x-6 !ml-auto">
         {status === 'authenticated' ? (
           <li>
-            <button onClick={() => signOut()}>SignOut</button>
+            <button
+              onClick={() =>
+                signOut({ redirect: true, callbackUrl: '/signin' })
+              }
+            >
+              SignOut
+            </button>
           </li>
         ) : (
           <>
@@ -47,7 +57,7 @@ const Navbar = () => {
               <Link href="/signin">SignIn</Link>
             </li>
             <li>
-              <Link href="/SignUp">SignUp</Link>
+              <Link href="/signup">SignUp</Link>
             </li>
           </>
         )}
