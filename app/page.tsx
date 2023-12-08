@@ -5,7 +5,7 @@ const Home = async () => {
   const session = await getServerSession(authOptions);
   return (
     <div>
-      <h1>Un-authenticated landing page</h1>
+      <h1>Un-authenticated landing page!</h1>
       <p>{JSON.stringify(session)}</p>
     </div>
   );
