@@ -4,32 +4,26 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signinValidationSchema } from '../helpers/validationSchema';
 import { z } from 'zod';
+import classNames from 'classnames';
+import { signIn } from 'next-auth/react';
 
 type SignInForm = z.infer<typeof signinValidationSchema>;
-const SignIn = () => {
-  // const email = useRef('');
-  // const password = useRef('');
 
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
-  //   await signIn('credentials', {
-  //     email: email.current,
-  //     password: password.current,
-  //     redirect: true,
-  //     callbackUrl: '/',
-  //   });
-  // };
+const SignIn = () => {
+  const onSubmit: SubmitHandler<SignInForm> = async (data, e) => {
+    await signIn('credentials', {
+      email: data.email,
+      password: data.password,
+      redirect: true,
+      callbackUrl: '/',
+    });
+  };
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<SignInForm>({ resolver: zodResolver(signinValidationSchema) });
-  const onSubmit: SubmitHandler<SignInForm> = (data) => console.log(data);
-
-  console.log(watch('email')); // watch input value by passing the name of it
-
   return (
     <form
       className="flex flex-col max-w-md m-auto"
@@ -39,19 +33,21 @@ const SignIn = () => {
         Email:
         <input
           type="email"
-          className="border w-full"
+          className={classNames({
+            'border w-full': true,
+          })}
           {...register('email', { required: true })}
         />
-        {errors.email && <span>This field is required</span>}
+        {errors.email && <span>{errors.email.message}</span>}
       </label>
       <label className="p-1">
         Password:
         <input
           type="password"
-          className="border w-full"
+          className={classNames({ 'border w-full': true })}
           {...register('password', { required: true })}
         />
-        {errors.email && <span>This field is required</span>}
+        {errors.password && <span>{errors.password.message}</span>}
       </label>
       <button
         type="submit"
