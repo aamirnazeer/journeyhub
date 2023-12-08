@@ -27,7 +27,7 @@ const SignIn = () => {
   } = useForm<SignInForm>({ resolver: zodResolver(signinValidationSchema) });
   const { status } = useSession();
   if (status === 'authenticated') redirect('/');
-  if (status === 'loading') return <p>Loading...</p>;
+  if (status === 'loading') return <p></p>;
 
   return (
     <form
