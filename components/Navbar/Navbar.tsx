@@ -9,8 +9,9 @@ import { useSession } from 'next-auth/react';
 
 const links = [
   { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Client', href: '/client' },
-  { label: 'Server', href: '/server' },
+  // { label: 'Client', href: '/client' },
+  // { label: 'Server', href: '/server' },
+  { label: 'Agents', href: '/agents' },
 ];
 
 const Navbar = () => {
