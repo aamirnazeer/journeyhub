@@ -40,6 +40,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.organisationId = user.organisationId;
+        token.picture = user.image;
       }
       if (trigger === 'update' && session.name) {
         token.name = session.name;
@@ -49,7 +50,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token, user }) {
       session.user.id = token.id;
       session.user.organisationId = token.organisationId;
-      delete session.user?.image;
+      session.user.image = token.picture;
       return session;
     },
   },

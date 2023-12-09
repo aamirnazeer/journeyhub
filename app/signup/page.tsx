@@ -21,7 +21,7 @@ const SignUp = () => {
   } = useForm<SignUpForm>({ resolver: zodResolver(signupValidation) });
   const { status } = useSession();
   if (status === 'authenticated') redirect('/');
-  if (status === 'loading') return <p>Loading...</p>;
+  if (status === 'loading') return <p></p>;
 
   const onSubmit = async (data: SignUpForm) => {
     setLoading(() => true);
@@ -42,6 +42,9 @@ const SignUp = () => {
           redirect: true,
           callbackUrl: '/',
         });
+      } else {
+        console.log(response);
+        setLoading(() => false);
       }
     } catch (err) {
       setLoading(() => false);
@@ -63,6 +66,7 @@ const SignUp = () => {
       />
       <Input
         label="Email"
+        type="email"
         placeholder="Enter your email address"
         error={!!errors.email}
         errorMessage={errors.email?.message}

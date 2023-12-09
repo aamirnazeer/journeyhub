@@ -8,14 +8,14 @@ import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 
 const links = [
-  { label: 'Dashboard', href: '/' },
+  { label: 'Dashboard', href: '/dashboard' },
   { label: 'Client', href: '/client' },
   { label: 'Server', href: '/server' },
 ];
 
 const Navbar = () => {
   const currentPath = usePathname();
-  const { status } = useSession();
+  const { status, data } = useSession();
   return (
     <nav className="flex space-x-6 border-b mb-5 px-6 h-14 items-center">
       <Link href="/">
@@ -41,6 +41,7 @@ const Navbar = () => {
       )}
 
       <ul className="flex space-x-6 !ml-auto">
+        <li> {data?.user.name}</li>
         {status === 'authenticated' ? (
           <li>
             <button

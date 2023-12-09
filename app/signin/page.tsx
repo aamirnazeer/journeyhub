@@ -23,6 +23,7 @@ const SignIn = () => {
     }).then((res) => {
       setLoading(() => false);
       if (res?.error) {
+        resetField('password');
         console.error(res.error);
       } else {
         return null;
@@ -33,6 +34,7 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
+    resetField,
   } = useForm<SignInForm>({ resolver: zodResolver(signinValidationSchema) });
   const { status } = useSession();
   if (status === 'authenticated') redirect('/');
@@ -45,6 +47,7 @@ const SignIn = () => {
       <Input
         placeholder="Enter your email"
         label="Email"
+        type="email"
         error={!!errors.email}
         errorMessage={errors.email?.message}
         hookForm={register('email', { required: true })}

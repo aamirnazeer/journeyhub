@@ -23,7 +23,6 @@ const Input = ({
             true,
           'border-red-500 mb-3': error,
         })}
-        id={hookForm.name}
         {...hookForm}
         type={type}
         placeholder={type === 'password' ? '**********' : placeholder}

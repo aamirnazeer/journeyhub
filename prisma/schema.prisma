@@ -17,6 +17,7 @@ model Users {
   password       String        @db.VarChar(100)
   organisationId String?       @db.VarChar(50)
   organisation   Organisation? @relation(fields: [organisationId], references: [id])
+  image          String        @default("https://placehold.co/400x400/png") @db.VarChar()
 }
 
 model Organisation {
