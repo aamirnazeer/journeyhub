@@ -4,14 +4,16 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signupValidation } from '@/helpers/validationSchema';
 import { z } from 'zod';
-import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import { Button, Input } from '@/components';
+import { useState } from 'react';
 
 type SignUpForm = z.infer<typeof signupValidation>;
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -22,6 +24,7 @@ const SignUp = () => {
   if (status === 'loading') return <p>Loading...</p>;
 
   const onSubmit = async (data: SignUpForm) => {
+    setLoading(() => true);
     try {
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
@@ -41,54 +44,38 @@ const SignUp = () => {
         });
       }
     } catch (err) {
+      setLoading(() => false);
       console.log(err);
     }
   };
 
   return (
     <form
-      className="flex flex-col max-w-md m-auto"
+      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 m-auto flex flex-col max-w-md"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label>
-        Name
-        <input
-          type="text"
-          className={classNames({
-            'border w-full': true,
-          })}
-          {...register('name', { required: true })}
-        />
-        {errors.name && <span>{errors.name.message}</span>}
-      </label>
-      <label>
-        Email
-        <input
-          type="email"
-          className={classNames({
-            'border w-full': true,
-          })}
-          {...register('email', { required: true })}
-        />
-        {errors.email && <span>{errors.email.message}</span>}
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          className={classNames({
-            'border w-full': true,
-          })}
-          {...register('password', { required: true })}
-        />
-        {errors.password && <span>{errors.password.message}</span>}
-      </label>
-      <button
-        type="submit"
-        className="border p-1 mt-1 w-fit justify-self-center m-auto bg-sky-500 rounded-md"
-      >
-        SignUp
-      </button>
+      <Input
+        label="Name"
+        placeholder="Enter your name"
+        error={!!errors.name}
+        errorMessage={errors.name?.message}
+        hookForm={register('name', { required: true })}
+      />
+      <Input
+        label="Email"
+        placeholder="Enter your email address"
+        error={!!errors.email}
+        errorMessage={errors.email?.message}
+        hookForm={register('email', { required: true })}
+      />
+      <Input
+        type="password"
+        label="Password"
+        error={!!errors.password}
+        errorMessage={errors.password?.message}
+        hookForm={register('password', { required: true })}
+      />
+      <Button label="SignUp" disabled={loading} />
     </form>
   );
 };
