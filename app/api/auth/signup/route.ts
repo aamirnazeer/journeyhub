@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/prisma/_base';
-import { signupValidation } from '@/app/helpers/validationSchema';
+import { signupValidation } from '@/helpers/validationSchema';
 import bcrypt from 'bcrypt';
 
 export async function POST(request: NextRequest) {

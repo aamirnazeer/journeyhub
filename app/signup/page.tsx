@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signupValidation } from '../helpers/validationSchema';
+import { signupValidation } from '@/helpers/validationSchema';
 import { z } from 'zod';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';

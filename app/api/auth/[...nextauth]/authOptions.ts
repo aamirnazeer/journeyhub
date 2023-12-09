@@ -2,7 +2,7 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/prisma/_base';
 import bcrypt from 'bcrypt';
-import { signinValidationSchema } from '@/app/helpers/validationSchema';
+import { signinValidationSchema } from '@/helpers/validationSchema';
 
 export const authOptions: NextAuthOptions = {
   providers: [
