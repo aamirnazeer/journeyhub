@@ -1,4 +1,10 @@
 import { getAllAgents } from '@/src/service/agents';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Agents',
+  description: 'CRM Solutions for Travel Ventures',
+};
 
 const Agents = async () => {
   const agents = await getAllAgents();

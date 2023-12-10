@@ -9,8 +9,6 @@ import { useSession } from 'next-auth/react';
 
 const links = [
   { label: 'Dashboard', href: '/dashboard' },
-  // { label: 'Client', href: '/client' },
-  // { label: 'Server', href: '/server' },
   { label: 'Agents', href: '/agents' },
 ];
 
@@ -42,7 +40,6 @@ const Navbar = () => {
       )}
 
       <ul className="flex space-x-6 !ml-auto">
-        <li> {data?.user.name}</li>
         {status === 'authenticated' ? (
           <li>
             <button

@@ -1,6 +1,12 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/src/app/api/auth/[...nextauth]/authOptions';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'CRM Solutions for Travel Ventures',
+};
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
