@@ -21,7 +21,42 @@ model Users {
 }
 
 model Organisation {
+  id     String   @id @default(uuid())
+  name   String   @db.VarChar(30)
+  Users  Users[]
+  Agents Agents[]
+}
+
+model Country {
   id    String  @id @default(uuid())
-  name  String  @db.VarChar(30)
-  Users Users[]
+  name  String  @db.VarChar(20)
+  State State[]
+}
+
+model State {
+  id        String  @id @default(uuid())
+  name      String  @db.VarChar(20)
+  countryId String  @db.VarChar(30)
+  Country   Country @relation(fields: [countryId], references: [id])
+  City      City[]
+}
+
+model City {
+  id      String   @id @default(uuid())
+  name    String   @db.VarChar(30)
+  stateId String   @db.VarChar(30)
+  State   State    @relation(fields: [stateId], references: [id])
+  Agents  Agents[]
+}
+
+model Agents {
+  id             String       @id @default(uuid())
+  orgName        String       @db.VarChar(30)
+  name           String       @db.VarChar(30)
+  email          String       @db.VarChar(40)
+  phone          Int          @db.Integer
+  cityId         String       @db.VarChar(30)
+  City           City         @relation(fields: [cityId], references: [id])
+  organisationId String       @db.VarChar(30)
+  Organisation   Organisation @relation(fields: [organisationId], references: [id])
 }

@@ -1,10 +1,16 @@
-'use client';
+import { getAllAgents } from '@/service/agents';
 
-import { useSession } from 'next-auth/react';
-
-const Agents = () => {
-  const session = useSession();
-  return <h1>agents</h1>;
+const Agents = async () => {
+  const agents = await getAllAgents();
+  console.log(agents);
+  return (
+    <div>
+      <h1>agents</h1>
+      {(agents || []).map((el) => {
+        return <p key={Math.random()}>{JSON.stringify(el)}</p>;
+      })}
+    </div>
+  );
 };
 
 export default Agents;
