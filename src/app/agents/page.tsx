@@ -1,4 +1,4 @@
-import { getAllAgents } from '@/service/agents';
+import { getAllAgents } from '@/src/service/agents';
 
 const Agents = async () => {
   const agents = await getAllAgents();

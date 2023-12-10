@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllAgents } from '@/service/agents';
+import { getAllAgents } from '@/src/service/agents';
 
 export async function GET(request: NextRequest) {
   try {

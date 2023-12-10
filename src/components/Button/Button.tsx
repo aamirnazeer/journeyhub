@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ButtonI } from '@/components/Button/ButtonI';
+import { ButtonI } from '@/src/components/Button/ButtonI';
 
 const Button = ({
   type = 'submit',

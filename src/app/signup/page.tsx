@@ -2,12 +2,12 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signupValidation } from '@/helpers/validationSchema';
+import { signupValidation } from '@/src/helpers/validationSchema';
 import { z } from 'zod';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { Button, Input } from '@/components';
+import { Button, Input } from '@/src/components';
 import { useState } from 'react';
 
 type SignUpForm = z.infer<typeof signupValidation>;

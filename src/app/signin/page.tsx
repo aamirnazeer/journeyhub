@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { Button, Input } from '@/components';
+import { Button, Input } from '@/src/components';
 import { useState } from 'react';
 
 type SignInForm = z.infer<typeof signinValidationSchema>;

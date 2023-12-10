@@ -1,4 +1,4 @@
-import { hookFormI } from '@/types/reactHookForm';
+import { hookFormI } from '@/src/types/reactHookForm';
 
 export interface InputI {
   type?:
