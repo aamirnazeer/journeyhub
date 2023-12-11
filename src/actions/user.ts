@@ -1,7 +1,7 @@
 'use server';
 
 import { signupValidation } from '../helpers/validationSchema';
-import { createUser } from '../service/signUp';
+import { createUser } from '../service/user';
 
 const signUpAction = async (body: any) => {
   const validation = signupValidation.safeParse(body);

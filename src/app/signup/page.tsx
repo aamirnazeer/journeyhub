@@ -9,7 +9,7 @@ import { redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { Button, Input } from '@/src/components';
 import { useState } from 'react';
-import signUpAction from '@/src/actions/signUp';
+import signUpAction from '@/src/actions/user';
 
 type SignUpForm = z.infer<typeof signupValidation>;
 

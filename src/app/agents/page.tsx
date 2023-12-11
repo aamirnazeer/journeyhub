@@ -1,4 +1,4 @@
-import { getAllAgents } from '@/src/service/agents';
+import getAgentsAction from '@/src/actions/agents';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const Agents = async () => {
-  const agents = await getAllAgents();
+  const agents = await getAgentsAction();
   console.log(agents);
   return (
     <div>
