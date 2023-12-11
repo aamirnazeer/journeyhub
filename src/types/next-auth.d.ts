@@ -6,11 +6,12 @@ declare module 'next-auth' {
     user: {
       id: string | unknwon;
       organisationId: string | unknown;
-      admin: boolean;
+      admin: boolean | undefined;
       image: string | undefined | null;
     };
   }
   interface User {
     organisationId: string?;
+    admin?: boolean;
   }
 }

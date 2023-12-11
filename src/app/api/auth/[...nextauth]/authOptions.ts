@@ -1,9 +1,10 @@
-import { NextAuthOptions, Session } from 'next-auth';
+import { NextAuthOptions, Session, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/prisma/_base';
 import bcrypt from 'bcrypt';
 import { signinValidationSchema } from '@/src/helpers/validationSchema';
 import { JWT } from 'next-auth/jwt';
+import type { AdapterUser } from 'next-auth/adapters';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -37,14 +38,12 @@ export const authOptions: NextAuthOptions = {
     signIn: '/signin',
   },
   callbacks: {
-    async jwt({ token, user, session, trigger }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.organisationId = user.organisationId;
         token.picture = user.image;
-      }
-      if (trigger === 'update' && session.name) {
-        token.name = session.name;
+        token.admin = user.admin;
       }
       return token;
     },
