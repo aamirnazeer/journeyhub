@@ -1,8 +1,8 @@
 import { ChangeHandler, RefCallBack } from 'react-hook-form';
 
-export interface hookFormI {
+export type hookFormT = {
   onChange: ChangeHandler;
   name: string;
   onBlur: ChangeHandler;
   ref: RefCallBack;
-}
+};

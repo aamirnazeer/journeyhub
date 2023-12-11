@@ -1,5 +1,5 @@
-export interface ButtonI {
+export type ButtonT = {
   type?: 'submit' | 'reset' | 'button' | undefined;
   label?: string;
   disabled?: boolean;
-}
+};

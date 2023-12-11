@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { InputI } from './InputI';
+import { InputT } from '@/src/types/input';
 
 const Input = ({
   type = 'text',
@@ -8,7 +8,7 @@ const Input = ({
   error = false,
   errorMessage = '',
   hookForm,
-}: InputI) => {
+}: InputT) => {
   return (
     <div className="mb-4">
       <label

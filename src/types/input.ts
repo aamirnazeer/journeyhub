@@ -1,6 +1,6 @@
-import { hookFormI } from '@/src/types/reactHookForm';
+import { hookFormT } from '@/src/types/reactHookForm';
 
-export interface InputI {
+export type InputT = {
   type?:
     | 'button'
     | 'checkbox'
@@ -28,5 +28,5 @@ export interface InputI {
   placeholder?: string;
   error?: boolean;
   errorMessage?: string;
-  hookForm: hookFormI;
-}
+  hookForm: hookFormT;
+};

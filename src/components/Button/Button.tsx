@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { ButtonI } from '@/src/components/Button/ButtonI';
+import { ButtonT } from '@/src/types/button';
 
 const Button = ({
   type = 'submit',
   label = 'Button',
   disabled = false,
-}: ButtonI) => {
+}: ButtonT) => {
   return (
     <button
       disabled={disabled}
