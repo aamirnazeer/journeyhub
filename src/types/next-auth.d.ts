@@ -6,7 +6,9 @@ declare module 'next-auth' {
     user: {
       id: string | unknwon;
       organisationId: string | unknown;
-    } & DefaultSession['user'];
+      admin: boolean;
+      image: string | undefined | null;
+    };
   }
   interface User {
     organisationId: string?;

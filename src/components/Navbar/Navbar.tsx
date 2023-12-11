@@ -36,6 +36,20 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          {data.user.admin && (
+            <li>
+              <Link
+                href="/admin"
+                className={classNames({
+                  'text-zinc-900': '/admin' === currentPath,
+                  'text-zinc-500': '/admin' !== currentPath,
+                  'hover:text-zinc-800 transition-colors': true,
+                })}
+              >
+                Admin
+              </Link>
+            </li>
+          )}
         </ul>
       )}
 

@@ -1,8 +1,9 @@
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/prisma/_base';
 import bcrypt from 'bcrypt';
 import { signinValidationSchema } from '@/src/helpers/validationSchema';
+import { JWT } from 'next-auth/jwt';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -47,7 +48,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.user.id = token.id;
       session.user.organisationId = token.organisationId;
       session.user.image = token.picture;

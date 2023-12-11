@@ -8,11 +8,10 @@ export const metadata: Metadata = {
 
 const Agents = async () => {
   const agents = await getAgentsAction();
-  console.log(agents);
   return (
     <div>
       <h1>agents</h1>
-      {(agents || []).map((el) => {
+      {agents?.map((el) => {
         return <p key={Math.random()}>{JSON.stringify(el)}</p>;
       })}
     </div>

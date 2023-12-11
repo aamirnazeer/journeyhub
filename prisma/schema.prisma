@@ -18,6 +18,7 @@ model Users {
   organisationId String?       @db.VarChar(50)
   organisation   Organisation? @relation(fields: [organisationId], references: [id])
   image          String        @default("https://placehold.co/400x400/png") @db.VarChar()
+  admin          Boolean       @default(false) @db.Boolean
 }
 
 model Organisation {
