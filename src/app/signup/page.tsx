@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { Button, Input } from '@/src/components';
 import { useState } from 'react';
+import signUpAction from '@/src/actions/signUp';
 
 type SignUpForm = z.infer<typeof signupValidation>;
 
@@ -26,16 +27,8 @@ const SignUp = () => {
   const onSubmit = async (data: SignUpForm) => {
     setLoading(() => true);
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
+      const response = await signUpAction(data);
+      if (response) {
         await signIn('credentials', {
           email: data.email,
           password: data.password,
