@@ -11,6 +11,10 @@ export const signinValidationSchema = z.object({
   password: z.string().min(5),
 });
 
-export const organisationSchema = z.object({
+export const organisationValidationSchema = z.object({
   name: z.string().min(2).max(30),
+});
+
+export const citiesValidationSchema = z.object({
+  country: z.string().min(2).max(20).trim().toLowerCase(),
 });

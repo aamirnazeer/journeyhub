@@ -15,3 +15,9 @@ declare module 'next-auth' {
     admin?: boolean;
   }
 }
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    admin?: boolean;
+  }
+}

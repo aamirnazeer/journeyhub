@@ -3,8 +3,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/prisma/_base';
 import bcrypt from 'bcrypt';
 import { signinValidationSchema } from '@/src/helpers/validationSchema';
-import { JWT } from 'next-auth/jwt';
-import type { AdapterUser } from 'next-auth/adapters';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -51,6 +49,7 @@ export const authOptions: NextAuthOptions = {
       session.user.id = token.id;
       session.user.organisationId = token.organisationId;
       session.user.image = token.picture;
+      session.user.admin = token.admin;
       return session;
     },
   },

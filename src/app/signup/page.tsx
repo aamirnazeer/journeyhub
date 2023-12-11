@@ -24,7 +24,7 @@ const SignUp = () => {
   if (status === 'authenticated') redirect('/');
   if (status === 'loading') return <p></p>;
 
-  const onSubmit = async (data: SignUpForm) => {
+  const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
     setLoading(() => true);
     try {
       const response = await signUpAction(data);

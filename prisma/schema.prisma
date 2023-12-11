@@ -30,7 +30,7 @@ model Organisation {
 
 model Country {
   id    String  @id @default(uuid())
-  name  String  @db.VarChar(20)
+  name  String  @unique @db.VarChar(20)
   State State[]
 }
 
