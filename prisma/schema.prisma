@@ -15,7 +15,7 @@ model Users {
   name           String        @db.VarChar(20)
   email          String        @unique @db.VarChar(40)
   password       String        @db.VarChar(100)
-  organisationId String?       @db.VarChar(50)
+  organisationId String?       @db.VarChar(36)
   organisation   Organisation? @relation(fields: [organisationId], references: [id])
   image          String        @default("https://placehold.co/400x400/png") @db.VarChar()
   admin          Boolean       @default(false) @db.Boolean
@@ -23,41 +23,42 @@ model Users {
 
 model Organisation {
   id     String   @id @default(uuid())
-  name   String   @db.VarChar(30)
+  name   String   @db.VarChar(50)
   Users  Users[]
   Agents Agents[]
 }
 
 model Country {
   id    String  @id @default(uuid())
-  name  String  @unique @db.VarChar(20)
+  name  String  @unique @db.VarChar(100)
+  iso3  String  @unique @db.VarChar(3)
   State State[]
 }
 
 model State {
   id        String  @id @default(uuid())
   name      String  @db.VarChar(20)
-  countryId String  @db.VarChar(30)
+  countryId String  @db.VarChar(36)
   Country   Country @relation(fields: [countryId], references: [id])
   City      City[]
 }
 
 model City {
   id      String   @id @default(uuid())
-  name    String   @db.VarChar(30)
-  stateId String   @db.VarChar(30)
+  name    String   @db.VarChar(50)
+  stateId String   @db.VarChar(36)
   State   State    @relation(fields: [stateId], references: [id])
   Agents  Agents[]
 }
 
 model Agents {
   id             String       @id @default(uuid())
-  orgName        String       @db.VarChar(30)
-  name           String       @db.VarChar(30)
-  email          String       @db.VarChar(40)
+  orgName        String       @db.VarChar(50)
+  name           String       @db.VarChar(50)
+  email          String       @db.VarChar(50)
   phone          Int          @db.Integer
-  cityId         String       @db.VarChar(30)
+  cityId         String       @db.VarChar(36)
   City           City         @relation(fields: [cityId], references: [id])
-  organisationId String       @db.VarChar(30)
+  organisationId String       @db.VarChar(36)
   Organisation   Organisation @relation(fields: [organisationId], references: [id])
 }

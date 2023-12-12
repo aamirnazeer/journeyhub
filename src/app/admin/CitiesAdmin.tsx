@@ -46,7 +46,7 @@ const CitiesAdmin = ({ cities }: props) => {
         />
       </form>
       <select id="country" name="country" required defaultValue="">
-        <option value="" disabled selected>
+        <option value="" disabled>
           Select a country
         </option>
         {cities?.map((el) => {

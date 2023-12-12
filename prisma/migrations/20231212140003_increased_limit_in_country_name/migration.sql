@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Country" ALTER COLUMN "name" SET DATA TYPE VARCHAR(100);

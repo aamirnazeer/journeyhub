@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Country" ALTER COLUMN "iso3" DROP DEFAULT;
